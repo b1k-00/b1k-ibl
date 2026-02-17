@@ -1,0 +1,37 @@
+CREATE TABLES teams (
+    team_id INTEGER PRIMARY KEY,
+    team_name TEXT NOT NULL
+    );
+
+CREATE TABLE players (
+    player_id INTEGER PRIMARY KEY,
+    team_id INTEGER NOT NULL,
+    FOREIGN KEY (team_id) REFERENCES teams(team_id),
+    player_name TEXT NOT NULL,
+    number INTEGER NOT NULL,
+    position TEXT NOT NULL
+    );
+
+CREATE TABLE games (
+    game_id INTEGER PRIMARY KEY,
+    home_team_id INTEGER NOT NULL,
+    away_team_id INTEGER NOT NULL,
+    FOREIGN KEY (home_team_id) REFERENCES teams(team_id),
+    FOREIGN KEY (away_team_id) REFERENCES teams(team_id),
+    game_date TEXT NOT NULL
+    );
+
+CREATE TABLE stats (
+    stat_id INTEGER PRIMARY KEY,
+    player_id INTEGER NOT NULL,
+    game_id INTEGER NOT NULL,
+    FOREIGN KEY (player_id) REFERENCES players(player_id),
+    FOREIGN KEY (game_id) REFERENCES games(game_id),
+    points INTEGER NOT NULL,
+    rebounds INTEGER NOT NULL,
+    assists INTEGER NOT NULL
+    blocks INTEGER NOT NULL,
+    steals INTEGER NOT NULL,
+    turnovers INTEGER NOT NULL,
+    minutes INTEGER NOT NULL
+    );
